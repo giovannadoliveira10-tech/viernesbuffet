@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <title>Nova senha – Agenda Buffet</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            display: block;
+            background: #000
+        }
+
+        .login {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            min-height: 100vh
+        }
+
+        .foto {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 44px;
+            color: #fff;
+            background:
+                linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .72)),
+                url("img/login.jpg") center/cover no-repeat,
+                linear-gradient(135deg, #000, #3a2800)
+        }
+
+        .foto p {
+            margin: 12px 0 0;
+            color: #e8dcc0;
+            font-size: 14px;
+            letter-spacing: .14em;
+            text-transform: uppercase
+        }
+
+        .lado {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            background: var(--bg)
+        }
+
+        .caixa {
+            width: 100%;
+            max-width: 400px
+        }
+
+        .caixa h1 {
+            font: 700 30px Georgia, serif;
+            margin: 0 0 4px
+        }
+
+        .caixa .sub {
+            color: var(--mut);
+            margin: 0 0 22px
+        }
+
+        .caixa label {
+            margin-top: 12px
+        }
+
+        .caixa .btn {
+            width: 100%;
+            margin: 24px 0 0;
+            display: block;
+            text-align: center;
+            text-decoration: none
+        }
+
+        .caixa .btn:disabled {
+            opacity: .6;
+            cursor: wait
+        }
+
+        .erro {
+            background: #fdecea;
+            border: 1.5px solid var(--r);
+            color: var(--r);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-weight: 700;
+            margin-bottom: 6px
+        }
+
+        .voltar {
+            text-align: center;
+            margin: 18px 0 0
+        }
+
+        .voltar a {
+            color: var(--gold-d);
+            font-weight: 600
+        }
+
+        @media(max-width:800px) {
+            .login {
+                grid-template-columns: 1fr
+            }
+
+            .foto {
+                min-height: 210px;
+                padding: 26px
+            }
+
+            .lado {
+                align-items: flex-start;
+                padding: 28px 20px 44px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <div class="foto">
+            <img src="img/logo.png" alt="Viernes Buffet" style="width:110px;height:110px;margin-bottom:8px">
+            <p>Agenda de eventos</p>
+        </div>
+        <div class="lado">
+
+            <form class="caixa" id="f">
+                <h1>Criar nova senha</h1>
+                <p class="sub">Escolha uma senha com pelo menos 10 caracteres.</p>
+                <div id="erro" class="erro" hidden></div>
+                <label><span>Nova senha</span><input id="nova" type="password" required minlength="10" maxlength="72"
+                        autocomplete="new-password" autofocus></label>
+                <label><span>Repita a nova senha</span><input id="rep" type="password" required minlength="10"
+                        maxlength="72" autocomplete="new-password"></label>
+                <button class="btn" type="submit" id="salvar">Salvar nova senha</button>
+                <p class="voltar"><a href="login.html">Voltar para o login</a></p>
+            </form>
+
+            <div class="caixa" id="pronto" hidden>
+                <h1>Senha alterada!</h1>
+                <p class="sub">Agora você já pode entrar com a nova senha.</p>
+                <a class="btn" href="login.html">Ir para o login</a>
+            </div>
+
+            <div class="caixa" id="invalido" hidden>
+                <h1>Link inválido</h1>
+                <p class="sub">Este link não é válido ou já expirou. Peça um novo link na tela de login.</p>
+                <a class="btn" href="esqueci.html">Pedir novo link</a>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        const $ = id => document.getElementById(id);
+        const cookie = nome => {
+            const m = document.cookie.match(new RegExp("(?:^|; )" + nome + "=([^;]*)"));
+            return m ? decodeURIComponent(m[1]) : "";
+        };
+
+        // o código vem na URL; guarda e tira do endereço, para não ficar no histórico do navegador
+        const token = new URLSearchParams(location.search).get("token") || "";
+        history.replaceState(null, "", "redefinir.html");
+
+        if (!token) { $("f").hidden = true; $("invalido").hidden = false; }
+
+        function mostrarErro(msg) { $("erro").textContent = msg; $("erro").hidden = false; }
+
+        $("f").addEventListener("submit", async ev => {
+            ev.preventDefault();
+            $("erro").hidden = true;
+            const nova = $("nova").value, rep = $("rep").value;
+            if (nova.length < 10) { mostrarErro("A senha precisa ter pelo menos 10 caracteres."); return; }
+            if (nova !== rep) { mostrarErro("As senhas não são iguais."); return; }
+
+            $("salvar").disabled = true;
+            try {
+                const r = await fetch("/api/redefinir-senha", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "X-XSRF-TOKEN": cookie("XSRF-TOKEN") },
+                    body: JSON.stringify({ token, novaSenha: nova })
+                });
+                if (r.ok) { $("f").hidden = true; $("pronto").hidden = false; return; }
+                let msg = "Não foi possível salvar a senha. Tente de novo.";
+                try { msg = (await r.json()).erro || msg; } catch { }
+                mostrarErro(msg);
+            } catch {
+                mostrarErro("Não foi possível salvar agora. Tente de novo em instantes.");
+            } finally {
+                $("salvar").disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

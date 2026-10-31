@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar – Agenda Buffet</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      display: block;
+      background: #000
+    }
+
+    .login {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      min-height: 100vh
+    }
+
+    .foto {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 44px;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .72)),
+        url("img/login.jpg") center 20%/cover no-repeat,
+        linear-gradient(135deg, #000, #3a2800)
+    }
+
+    .foto .logo {
+      font-size: 60px
+    }
+
+    .foto .logo s {
+      height: 52px;
+      width: 3px
+    }
+
+    .foto p {
+      margin: 12px 0 0;
+      color: #e8dcc0;
+      font-size: 14px;
+      letter-spacing: .14em;
+      text-transform: uppercase
+    }
+
+    .lado {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: var(--bg)
+    }
+
+    .caixa {
+      width: 100%;
+      max-width: 400px
+    }
+
+    .caixa h1 {
+      font: 700 32px Georgia, serif;
+      margin: 0 0 4px
+    }
+
+    .caixa .sub {
+      color: var(--mut);
+      margin: 0 0 22px
+    }
+
+    .caixa label {
+      margin-top: 12px
+    }
+
+    .caixa .btn {
+      width: 100%;
+      margin: 24px 0 0
+    }
+
+    .erro {
+      background: #fdecea;
+      border: 1.5px solid var(--r);
+      color: var(--r);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-weight: 700;
+      margin-bottom: 6px
+    }
+
+    @media(max-width:800px) {
+      .login {
+        grid-template-columns: 1fr
+      }
+
+      .foto {
+        order: -1;
+        min-height: 210px;
+        padding: 26px
+      }
+
+      .foto .logo {
+        font-size: 46px
+      }
+
+      .foto .logo s {
+        height: 40px
+      }
+
+      .lado {
+        align-items: flex-start;
+        padding: 28px 20px 44px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login">
+    <div class="lado">
+      <form method="post" action="/login" class="caixa">
+        <h1>Entrar</h1>
+        <p class="sub">Acesse o sistema de eventos.</p>
+        <div id="erro" class="erro" hidden>E-mail ou senha incorretos.</div>
+        <input type="hidden" name="_csrf" id="csrf">
+        <label><span>E-mail</span><input name="username" type="email" required autofocus
+            autocomplete="username"></label>
+        <label><span>Senha</span><input name="password" type="password" required
+            autocomplete="current-password"></label>
+        <button class="btn" type="submit">Entrar</button>
+        <p style="text-align:center;margin:16px 0 0"><a href="esqueci.html"
+            style="color:#8F5E00;font-weight:600">Esqueceu a senha?</a></p>
+      </form>
+    </div>
+    <div class="foto">
+      <div class="logo"><i>V</i><s></s>b</div>
+      <p>Agenda de eventos</p>
+    </div>
+  </div>
+  <script>
+    if (location.search.includes("erro")) document.getElementById("erro").hidden = false;
+    const m = document.cookie.match(/(?:^|; )XSRF-TOKEN=([^;]*)/);
+    if (m) document.getElementById("csrf").value = decodeURIComponent(m[1]);
+  </script>
+</body>
+
+</html>

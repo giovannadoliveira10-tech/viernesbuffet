@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda Buffet</title>
+  <link rel="icon" href="img/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <header class="topo">
+    <div class="topo-in">
+      <div class="logo"><img src="img/logo.png" alt="Viernes Buffet – Agenda de eventos"></div>
+    </div>
+    <nav role="tablist">
+      <button role="tab" aria-selected="true" data-t="agenda">Calendário</button>
+      <button role="tab" aria-selected="false" data-t="rel">Relatório</button>
+    </nav>
+  </header>
+
+  <main class="conteudo">
+
+    <section id="agenda">
+      <h2>Calendário</h2>
+      <div class="bar">
+        <select id="mes" aria-label="Mês"></select>
+        <select id="ano" aria-label="Ano">
+          <option>2026</option>
+          <option>2027</option>
+          <option>2028</option>
+        </select>
+        <select id="vis" aria-label="Filtrar eventos">
+          <option value="todos">Todos os eventos</option>
+          <option value="futuros">Eventos futuros</option>
+          <option value="passados">Eventos já realizados</option>
+        </select>
+        <div class="leg"><span><i class="dot v"></i>Fechado</span><span><i class="dot a"></i>Orçamento</span><span><i
+              class="dot n"></i>Não pago</span></div>
+      </div>
+      <div class="cal" id="cal"></div>
+      <div class="card" id="det"><b>Toque em um dia</b> para ver os eventos.</div>
+    </section>
+
+    <section id="novo" hidden>
+      <div class="form-topo">
+        <h2 id="tituloForm">Novo evento</h2>
+      </div>
+
+      <h3>Clientes</h3>
+      <div class="grid">
+        <label><span>Cliente 1 – Nome</span><input id="c1nome"></label>
+        <label><span>Sobrenome</span><input id="c1sobrenome"></label>
+        <label><span>E-mail</span><input id="c1email" type="email"></label>
+        <label><span>Telefone 1</span><input id="tel1"></label>
+        <label><span>Cliente 2 – Nome</span><input id="c2nome"></label>
+        <label><span>Sobrenome</span><input id="c2sobrenome"></label>
+        <label><span>E-mail</span><input id="c2email" type="email"></label>
+        <label><span>Telefone 2</span><input id="tel2"></label>
+      </div>
+
+      <h3>Evento</h3>
+      <div class="grid">
+        <label><span>Tipo de evento</span><select id="tipoEvento"></select></label>
+        <label><span>Status</span>
+          <select id="status">
+            <option value="ORCAMENTO">Orçamento</option>
+            <option value="FECHADO">Fechado</option>
+            <option value="NAO_PAGO">Não pago</option>
+          </select>
+        </label>
+        <label><span>Data de atendimento</span><input id="dataAtend" type="date"></label>
+        <label><span>Data da confirmação</span><input id="dataConf" type="date"></label>
+        <label><span>Data do evento</span><input id="dataEvento" type="date"></label>
+        <label><span>Horário de início</span><input id="horaIni" type="time"></label>
+        <label><span>Horário de término</span><input id="horaFim" type="time"></label>
+      </div>
+
+      <h3>Cadastrar novo tipo de evento</h3>
+      <div class="grid">
+        <label><span>Nome do tipo</span><input id="novoTipo" placeholder="Ex.: Batizado"></label>
+        <div><button type="button" class="btn sec" id="addTipo" style="margin-top:20px">Cadastrar tipo</button></div>
+      </div>
+
+      <h3>Profissionais</h3>
+      <div class="grid">
+        <label><span>Cerimonialista – Nome</span><input id="cerNome"></label><label><span>Telefone</span><input
+            id="cerTel"></label>
+        <label><span>Organizador – Nome</span><input id="orgNome"></label><label><span>Telefone</span><input
+            id="orgTel"></label>
+        <label><span>DJ – Nome</span><input id="djNome"></label><label><span>Telefone</span><input id="djTel"></label>
+      </div>
+
+      <h3>Convidados</h3>
+      <div class="grid">
+        <label><span>Previstos</span><input id="prev" type="number" min="0"></label>
+        <label><span>Compareceram</span><input id="comp" type="number" min="0"></label>
+        <label><span>Pagantes inteiros</span><input id="inteiros" class="g" type="number" min="0"></label>
+        <label><span>Meias</span><input id="meias" class="g" type="number" min="0"></label>
+        <label><span>Não pagantes</span><input id="naoPag" class="g" type="number" min="0"></label>
+        <div class="tot" id="tot">Total: 0</div>
+      </div>
+
+      <h3>Valores (use ponto para os centavos, ex.: 180.50)</h3>
+      <div class="grid">
+        <label><span>Valor por pessoa (R$)</span><input id="vPessoa" type="number" step="0.01"></label>
+        <label><span>Valor do buffet (R$)</span><input id="vBuffet" type="number" step="0.01"></label>
+        <label><span>Valor final do contrato (R$)</span><input id="vFinal" type="number" step="0.01"></label>
+        <label><span>Custo variável (R$)</span><input id="custo" type="number" step="0.01"></label>
+        <label><span>Valor da venda real (R$)</span><input id="vVenda" type="number" step="0.01"></label>
+        <label><span>Total recebido (R$)</span><input id="recebido" type="number" step="0.01"></label>
+      </div>
+      <div class="card sw"><input type="checkbox" id="bar"><label for="bar" style="margin:0">Bartender (produto à parte)
+          incluído neste evento</label></div>
+
+      <h3>Observação</h3>
+      <textarea id="obs" rows="3" placeholder="Anotações sobre o evento"></textarea>
+
+      <button class="btn" id="save">Salvar evento</button>
+      <button class="btn sec" id="cancelar" hidden>Cancelar edição</button>
+    </section>
+
+    <section id="rel" hidden>
+      <h2>Relatório do ano</h2>
+      <div class="bar">
+        <select id="anoRel" aria-label="Ano">
+          <option>2026</option>
+          <option>2027</option>
+          <option>2028</option>
+        </select>
+        <button class="mini" id="imprimirRel">Imprimir relatório</button>
+      </div>
+      <div class="tw">
+        <table id="tb"></table>
+      </div>
+      <p class="note">Diferença = valor da venda – custo.</p>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div><b>V | b</b> &nbsp; Agenda de eventos</div>
+    <div id="anoRodape"></div>
+  </footer>
+
+  <!-- Janela exibida depois de salvar -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box">
+      <h2>Evento salvo!</h2>
+      <p>Deseja imprimir a ficha agora?</p>
+      <button class="btn" id="mImprimir">Imprimir ficha</button>
+      <button class="btn sec" id="mAgenda">Ver no calendário</button>
+      <button class="btn sec" id="mNovo">Novo evento</button>
+    </div>
+  </div>
+
+  <!-- Área usada só na impressão -->
+  <div id="ficha"></div>
+
+  <script src="js/csrf.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/extras.js"></script>
+  <script src="js/acesso.js"></script>
+  <script src="js/clientes.js"></script>
+  <script src="js/conflito.js"></script>
+  <script src="js/painel.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script src="js/agradecimento.js"></script>
+  <script src="js/ajustes.js"></script>
+  <script src="js/calendario.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/inicio.js"></script>
+  <script src="js/secoes.js"></script>
+  <script src="js/drawer.js"></script>
+  <script src="js/relatorio.js"></script>
+  <script src="js/vistas.js"></script>
+  <script src="js/cabecalho.js"></script>
+  <script src="js/painel-evento.js"></script>
+  <script src="js/calendario-hover.js"></script>
+  <script src="js/lista-lateral.js"></script>
+</body>
+
+</html>
