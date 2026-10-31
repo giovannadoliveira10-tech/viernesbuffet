@@ -1,0 +1,1968 @@
+
+/* Bebas Neue (SIL Open Font License) – usada nos números */
+@font-face {
+  font-family: "NumBebas";
+  src: url("../fonts/BebasNeue-Regular.ttf") format("truetype");
+  font-display: swap;
+  unicode-range: U+0030-0039;
+}
+
+@font-face {
+  font-family: "Bebas";
+  src: url("../fonts/BebasNeue-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Inter (SIL Open Font License) – usada nos textos */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --gold: #DDBB7D;
+  /* creme dourado: botões, aba selecionada, detalhes */
+  --gold-d: #8F5E00;
+  /* dourado escuro: textos e contornos sobre fundo claro */
+  --ink: #000;
+  --paper: #fff;
+  --bg: #faf8f4;
+  --soft: #f3efe6;
+  --line: #e4ddcf;
+  --mut: #6b6558;
+  --g: #2E7D32;
+  --y: #E0A800;
+  --r: #C62828;
+  --rad: 14px;
+  --sombra: 0 4px 16px rgba(0, 0, 0, .06);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #1a1a1a;
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh
+}
+
+[hidden] {
+  display: none !important
+}
+
+/* ---------- Menu / cabeçalho (branco, letras pretas) ---------- */
+.topo {
+  background: #fff;
+  color: #000;
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 10px
+}
+
+.topo-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 28px 8px
+}
+
+.logo {
+  font: 700 34px/1 Georgia, "Times New Roman", serif;
+  display: flex;
+  align-items: center;
+  gap: 9px
+}
+
+.logo i {
+  font-style: normal;
+  color: var(--gold)
+}
+
+.logo s {
+  display: inline-block;
+  width: 2px;
+  height: 28px;
+  background: currentColor
+}
+
+.logo small {
+  font: 500 12px system-ui, sans-serif;
+  color: #d9c9a3;
+  margin-left: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase
+}
+
+.logo img {
+  display: block;
+  width: 52px;
+  height: 52px
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  padding: 4px 28px 0;
+  overflow-x: auto
+}
+
+nav button {
+  background: transparent;
+  border: 1.5px solid transparent;
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font: 600 14px system-ui, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px
+}
+
+nav button:hover {
+  background: var(--soft)
+}
+
+nav button[aria-selected=true] {
+  background: var(--gold);
+  color: #000
+}
+
+nav .ico {
+  flex: none
+}
+
+.topo-in> :not(.logo) {
+  color: #000
+}
+
+/* ---------- Conteúdo ---------- */
+.conteudo {
+  flex: 1;
+  width: 100%;
+  padding: 26px 28px 40px
+}
+
+h2 {
+  font: 700 26px Georgia, serif;
+  margin: 0 0 16px
+}
+
+h3 {
+  font: 700 16px Georgia, serif;
+  margin: 22px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+h3:focus-visible {
+  outline: 3px solid var(--gold-d);
+  outline-offset: 2px
+}
+
+/* ---------- Barra superior ---------- */
+.barra-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: -6px 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line)
+}
+
+.migalha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--mut)
+}
+
+.migalha i {
+  font-style: normal;
+  opacity: .6
+}
+
+.migalha b {
+  color: #111
+}
+
+.barra-dir {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap
+}
+
+.barra-dir .btn {
+  margin: 0;
+  padding: 9px 22px;
+  color: #fff;
+  border: 1.5px solid var(--gold);
+  background: #000 radial-gradient(130px 46px at 90% 0, rgba(221, 187, 125, .55), transparent 70%)
+}
+
+.barra-dir .btn:hover {
+  background: var(--gold);
+  color: #000
+}
+
+/* ---------- Formulário ---------- */
+select,
+input,
+textarea {
+  font: inherit;
+  color: #111;
+  background: #fff;
+  border: 1.5px solid #1a1a1a;
+  padding: 9px 12px;
+  width: 100%;
+  border-radius: 10px
+}
+
+input[type=checkbox] {
+  width: auto
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333
+}
+
+label span {
+  display: block;
+  margin-bottom: 4px
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px
+}
+
+.bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px
+}
+
+.bar select {
+  width: auto;
+  min-width: 130px
+}
+
+#agenda .bar>.btn {
+  display: none
+}
+
+.leg {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  margin-left: auto;
+  color: #333
+}
+
+.leg span {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 3px 12px;
+  border-radius: 999px
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 7px
+}
+
+.v {
+  background: var(--g)
+}
+
+.a {
+  background: var(--y)
+}
+
+.n {
+  background: var(--r)
+}
+
+#novo {
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: 18px;
+  padding: 24px 26px;
+  box-shadow: var(--sombra)
+}
+
+.sec-t {
+  cursor: pointer;
+  user-select: none
+}
+
+.sec-t:after {
+  content: "▾";
+  margin-left: auto;
+  color: var(--gold-d);
+  font-size: 18px
+}
+
+.sec-t.fechada:after {
+  content: "▸"
+}
+
+.sec-corpo {
+  padding-top: 4px
+}
+
+.sw {
+  display: flex;
+  gap: 10px;
+  align-items: center
+}
+
+.sw input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--gold-d)
+}
+
+.tot {
+  font-weight: 700;
+  padding: 10px 12px;
+  border: 1.5px dashed #999;
+  border-radius: 10px;
+  background: var(--soft)
+}
+
+#recalc+.note {
+  display: none
+}
+
+.btn {
+  background: var(--gold);
+  color: #000;
+  border: 1.5px solid var(--ink);
+  padding: 11px 26px;
+  border-radius: 999px;
+  font: 700 15px system-ui, sans-serif;
+  cursor: pointer;
+  margin: 18px 10px 0 0;
+  transition: .15s
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--gold)
+}
+
+.btn.sec {
+  background: #fff
+}
+
+.btn.sec:hover {
+  background: var(--ink);
+  color: #fff
+}
+
+.link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--gold-d);
+  font: 600 13px system-ui, sans-serif;
+  cursor: pointer
+}
+
+.link:hover {
+  text-decoration: underline
+}
+
+/* ---------- Cliente: campo único ---------- */
+.cli-bloco {
+  margin-bottom: 14px
+}
+
+.cli-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px
+}
+
+.cli-topo b {
+  font-size: 13px
+}
+
+.cli-busca {
+  position: relative
+}
+
+.cli-res {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 30;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+  max-height: 260px;
+  overflow-y: auto
+}
+
+.cli-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  color: inherit;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 9px 14px;
+  cursor: pointer;
+  font: 14px system-ui, sans-serif
+}
+
+.cli-item:hover {
+  background: var(--soft)
+}
+
+.cli-item span {
+  font-size: 12px;
+  color: var(--mut)
+}
+
+.cli-novo {
+  color: var(--gold-d);
+  font-weight: 700;
+  border-bottom: 0
+}
+
+.cli-vazio {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--mut)
+}
+
+.cli-sel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--soft);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  padding: 10px 14px
+}
+
+.cli-campos {
+  margin-top: 10px
+}
+
+/* ---------- Cartões de números ---------- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px
+}
+
+.kpi {
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rad);
+  padding: 10px 16px;
+  box-shadow: var(--sombra)
+}
+
+.kpi span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--mut)
+}
+
+.kpi b {
+  font: 700 21px Georgia, serif
+}
+
+/* ---------- Calendário: cabeçalho ---------- */
+.cal-cab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rad);
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--sombra)
+}
+
+.cab-esq {
+  display: flex;
+  align-items: center;
+  gap: 16px
+}
+
+.selo {
+  width: 64px;
+  flex: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  background: #fff
+}
+
+.selo span {
+  display: block;
+  background: #000;
+  color: #fff;
+  font: 700 11px system-ui, sans-serif;
+  letter-spacing: .08em;
+  padding: 3px 0
+}
+
+.selo b {
+  display: block;
+  font: 400 28px/1.15 "Bebas", "NumBebas", Georgia, serif;
+  padding: 2px 0 4px
+}
+
+.cab-tit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap
+}
+
+.cal-cab h3 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: 700 24px Georgia, serif;
+  text-transform: lowercase
+}
+
+.chip-n {
+  background: var(--soft);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333
+}
+
+.cab-sub {
+  font-size: 14px;
+  color: var(--mut);
+  margin-top: 2px
+}
+
+/* seletor de visões (Semana / Mês) em ícones */
+.seg {
+  display: inline-flex;
+  background: var(--soft);
+  border: 0;
+  border-radius: 999px;
+  padding: 4px;
+  gap: 2px
+}
+
+.seg button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--mut);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: 600 13px system-ui, sans-serif;
+  cursor: pointer
+}
+
+.seg button span {
+  display: none
+}
+
+.seg button[aria-pressed="true"] {
+  background: #fff;
+  color: #111;
+  padding: 8px 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .18)
+}
+
+.seg button[aria-pressed="true"] span {
+  display: inline
+}
+
+/* ---------- Calendário: mês ---------- */
+.cal {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rad);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--sombra)
+}
+
+.cal>* {
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  min-height: 104px;
+  padding: 6px;
+  font-size: 13px;
+  overflow: hidden
+}
+
+.cal .h {
+  min-height: 0;
+  font-weight: 700;
+  text-align: center;
+  background: #fff;
+  color: #444;
+  text-transform: lowercase;
+  font-size: 13px;
+  padding: 12px 4px
+}
+
+.cal .h:after {
+  content: "."
+}
+
+.cal .fora {
+  color: #bdb6a6;
+  font-size: 13px;
+  background: transparent
+}
+
+.cal .d {
+  cursor: pointer;
+  background: #fff;
+  color: #1a1a1a;
+  text-align: left;
+  font-family: inherit;
+  transition: background .12s;
+  position: relative
+}
+
+.cal .d:hover {
+  background: var(--soft)
+}
+
+.cal .d.sel {
+  outline: 3px solid var(--gold-d);
+  outline-offset: -3px;
+  border-radius: 6px
+}
+
+.cal .d.hoje>b {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg)
+}
+
+body.admin .cal .d:not(:has(.chip)):hover:after {
+  content: "+ Adicionar";
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  font: 600 13px system-ui, sans-serif;
+  color: var(--mut)
+}
+
+.chip {
+  display: block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 6px
+}
+
+.chip.n {
+  color: #fff
+}
+
+/* ---------- Calendário: semana ---------- */
+.sem {
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rad);
+  background: #fff;
+  overflow-x: auto;
+  box-shadow: var(--sombra)
+}
+
+.sem-in {
+  min-width: 720px
+}
+
+.sem-linha {
+  display: grid;
+  grid-template-columns: 56px repeat(7, 1fr)
+}
+
+.sem-cab {
+  background: #000;
+  color: #fff
+}
+
+.sem-dia {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #222;
+  color: #fff;
+  padding: 9px 4px;
+  font: 600 13px system-ui, sans-serif;
+  cursor: pointer
+}
+
+.sem-dia b {
+  font: 400 20px "Bebas", "NumBebas", Georgia, serif;
+  letter-spacing: .03em
+}
+
+.sem-dia:hover {
+  color: var(--gold)
+}
+
+.sem-dia.hoje {
+  box-shadow: inset 0 -3px 0 var(--gold)
+}
+
+.sem-h {
+  font-size: 11px;
+  color: var(--mut);
+  padding: 8px 6px;
+  text-align: right
+}
+
+.sem-cel {
+  border-left: 1px solid var(--line);
+  padding: 3px;
+  min-height: 30px;
+  border-bottom: 1px solid var(--line)
+}
+
+.sem-ev-s {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin-bottom: 3px;
+  font: 600 12px system-ui, sans-serif;
+  cursor: pointer;
+  color: #000
+}
+
+.sem-ev-s.n {
+  color: #fff
+}
+
+.sem-rolagem {
+  max-height: 560px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line)
+}
+
+.sem-horas>div {
+  font-size: 12px;
+  color: var(--mut);
+  text-align: right;
+  padding: 2px 8px 0 0;
+  border-top: 1px solid var(--line)
+}
+
+.sem-col {
+  position: relative;
+  height: calc(24 * 44px);
+  border-left: 1px solid var(--line);
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent 43px, var(--line) 43px, var(--line) 44px)
+}
+
+.sem-ev {
+  position: absolute;
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, .35);
+  border-radius: 8px;
+  padding: 2px 6px;
+  font: 600 12px/1.25 system-ui, sans-serif
+}
+
+.sem-ev.n {
+  color: #fff
+}
+
+/* ---------- Cartões e detalhes ---------- */
+.card {
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rad);
+  padding: 16px;
+  margin-top: 16px;
+  background: #fff;
+  box-shadow: var(--sombra)
+}
+
+.ev {
+  border-top: 1px solid var(--line);
+  padding: 10px 0
+}
+
+.ev:first-of-type {
+  border-top: 0
+}
+
+.ev b {
+  font-family: Georgia, serif
+}
+
+.tag {
+  display: inline-block;
+  padding: 1px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000;
+  border-radius: 999px
+}
+
+.tag.n {
+  color: #fff
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px
+}
+
+.mini {
+  background: #fff;
+  color: #000;
+  border: 1.5px solid var(--ink);
+  padding: 5px 14px;
+  border-radius: 999px;
+  font: 600 13px system-ui, sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: .12s
+}
+
+.mini:hover {
+  background: var(--ink);
+  color: #fff
+}
+
+.mini.perigo {
+  border-color: var(--r);
+  color: var(--r)
+}
+
+.mini.perigo:hover {
+  background: var(--r);
+  color: #fff
+}
+
+/* ---------- Tabelas ---------- */
+.tw {
+  overflow-x: auto;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rad);
+  box-shadow: var(--sombra)
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px
+}
+
+th,
+td {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left
+}
+
+th {
+  background: var(--ink);
+  color: #fff
+}
+
+tr:last-child td,
+tr:last-child th {
+  border-bottom: 0
+}
+
+td.r,
+th.r {
+  text-align: right
+}
+
+.note {
+  font-size: 13px;
+  color: var(--mut);
+  margin-top: 10px
+}
+
+.masked .val {
+  color: transparent;
+  text-shadow: 0 0 8px #000;
+  user-select: none
+}
+
+/* ---------- Início ---------- */
+.saud {
+  margin: 0 0 14px
+}
+
+.saud h2 {
+  font: 700 30px Georgia, serif;
+  margin: 0 0 2px
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  border-radius: 20px;
+  padding: 26px 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: center;
+  box-shadow: var(--sombra)
+}
+
+.hero:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(520px 220px at 88% 0, rgba(221, 187, 125, .32), transparent 70%)
+}
+
+.hero>* {
+  position: relative
+}
+
+.hero .rot {
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700
+}
+
+.hero h1 {
+  font: 700 30px/1.2 Georgia, serif;
+  margin: 8px 0 10px
+}
+
+.hero p {
+  margin: 0 0 14px;
+  color: #e8dcc0;
+  font-size: 14px
+}
+
+.hero .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px
+}
+
+.hero .chips span {
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, .06)
+}
+
+.atencao {
+  margin-top: 16px
+}
+
+.at-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line)
+}
+
+.at-item:first-of-type {
+  border-top: 0
+}
+
+.at-item .dot {
+  flex: none;
+  margin: 0;
+  width: 12px;
+  height: 12px
+}
+
+.at-item>span {
+  flex: 1;
+  min-width: 0
+}
+
+.at-item .mini {
+  flex: none
+}
+
+#pnListas:empty {
+  display: none
+}
+
+/* ---------- Relatório: gráfico ---------- */
+.gr-leg {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  margin: 8px 0 12px;
+  color: var(--mut)
+}
+
+.gr-leg span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px
+}
+
+.gr-lin {
+  display: grid;
+  grid-template-columns: 70px 1fr 130px;
+  gap: 12px;
+  align-items: center;
+  padding: 5px 0
+}
+
+.gr-rot {
+  font-size: 13px;
+  color: var(--mut)
+}
+
+.gr-barras {
+  display: grid;
+  gap: 4px
+}
+
+.gr-b {
+  height: 10px;
+  border-radius: 6px;
+  min-width: 2px
+}
+
+i.gr-b {
+  display: inline-block;
+  width: 12px;
+  height: 12px
+}
+
+.gr-v {
+  background: #000
+}
+
+.gr-r {
+  background: var(--gold);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25)
+}
+
+.gr-val {
+  text-align: right;
+  font-size: 15px
+}
+
+/* ---------- Janela após salvar ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 80
+}
+
+.modal-box {
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .3);
+  padding: 28px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center
+}
+
+.modal-box h2 {
+  margin-bottom: 6px
+}
+
+.modal-box .btn {
+  margin: 10px 6px 0
+}
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  background: var(--ink);
+  color: #d9c9a3;
+  border-top: 3px solid var(--gold);
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13px
+}
+
+.rodape b {
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: 15px
+}
+
+/* ---------- Menu simplificado ---------- */
+nav button[data-t="novo"],
+nav button[data-t="clientes"] {
+  display: none !important
+}
+
+/* ---------- Painel lateral do novo evento ---------- */
+#drawerFundo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  z-index: 55
+}
+
+body.drawer-aberto {
+  overflow: hidden
+}
+
+body.drawer-aberto #novo {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(780px, 100%);
+  margin: 0;
+  overflow-y: auto;
+  z-index: 60;
+  border-radius: 20px 0 0 20px;
+  box-shadow: -14px 0 44px rgba(0, 0, 0, .3);
+  animation: entra .18s ease-out;
+  background: var(--bg);
+  padding-top: 0;
+  padding-bottom: 0
+}
+
+@keyframes entra {
+  from {
+    transform: translateX(40px);
+    opacity: 0
+  }
+
+  to {
+    transform: none;
+    opacity: 1
+  }
+}
+
+.dr-cab {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg);
+  margin: 0 -26px 14px;
+  padding: 22px 26px 12px;
+  border-bottom: 1px solid var(--line)
+}
+
+.dr-cab h2 {
+  margin: 0 0 2px;
+  font-size: 26px
+}
+
+.dr-sub {
+  margin: 0;
+  color: var(--mut);
+  font-size: 14px
+}
+
+#novo .dr-x {
+  float: none;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  display: grid;
+  place-items: center
+}
+
+.sec-card {
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--sombra)
+}
+
+.sec-card>h3 {
+  margin: 0;
+  padding: 0;
+  border: 0
+}
+
+.sec-card>.sec-corpo {
+  padding-top: 14px
+}
+
+.dr-rodape {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  background: var(--bg);
+  margin: 0 -26px;
+  padding: 14px 26px 18px;
+  border-top: 1px solid var(--line)
+}
+
+.dr-rodape .btn {
+  margin: 0;
+  padding: 14px 24px
+}
+
+.dr-rodape #save {
+  flex: 1
+}
+
+/* seletor de horário */
+.hr-bloco {
+  margin-top: 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--bg)
+}
+
+.hr-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px
+}
+
+.hr-rot {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--mut);
+  margin: 10px 0 6px
+}
+
+.hr-grade {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px
+}
+
+.hr-b {
+  background: #fff;
+  color: #111;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 0;
+  cursor: pointer
+}
+
+.hr-b:hover {
+  border-color: var(--ink)
+}
+
+.hr-b[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink)
+}
+
+.hr-nativos {
+  margin-top: 10px
+}
+
+/* ---------- Menu lateral (computador) ---------- */
+.menu-toggle {
+  display: none
+}
+
+@media (min-width:901px) {
+  body:has(> .topo) {
+    padding-left: 236px;
+    transition: padding-left .2s
+  }
+
+  .topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 236px;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 14px 18px;
+    border-bottom: 0;
+    border-right: 3px solid var(--gold);
+    overflow-y: auto;
+    transition: width .2s
+  }
+
+  .topo-in {
+    display: contents
+  }
+
+  .topo .logo {
+    order: 0;
+    padding: 0 8px 22px;
+    font-size: 42px
+  }
+
+  .topo .logo small {
+    display: none
+  }
+
+  .topo .logo img {
+    width: 88px;
+    height: 88px
+  }
+
+  .topo nav {
+    order: 1;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+    overflow: visible
+  }
+
+  .topo nav button {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 16px
+  }
+
+  /* nome do usuário e botão Sair ficam no pé do menu */
+  .topo-in> :not(.logo) {
+    order: 2;
+    margin-top: auto;
+    padding: 14px 10px 0;
+    border-top: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 8px !important
+  }
+
+  /* botão que recolhe o menu */
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 30px;
+    left: 222px;
+    z-index: 45;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #000;
+    border: 2px solid var(--ink);
+    font: 700 18px/1 system-ui, sans-serif;
+    cursor: pointer;
+    transition: left .2s, background .15s
+  }
+
+  .menu-toggle:hover {
+    background: #fff
+  }
+
+  body.menu-min .menu-toggle {
+    left: 62px
+  }
+
+  /* menu recolhido: só os ícones */
+  body.menu-min:has(> .topo) {
+    padding-left: 76px
+  }
+
+  body.menu-min .topo {
+    width: 76px;
+    padding-left: 10px;
+    padding-right: 10px
+  }
+
+  body.menu-min .topo .logo {
+    padding: 0 0 18px;
+    justify-content: center
+  }
+
+  body.menu-min .topo .logo img {
+    width: 48px;
+    height: 48px
+  }
+
+  body.menu-min .topo nav button {
+    justify-content: center;
+    padding: 12px 0;
+    font-size: 0;
+    gap: 0
+  }
+
+  body.menu-min .topo-in> :not(.logo) {
+    padding: 14px 0 0;
+    align-items: center !important
+  }
+
+  body.menu-min .topo-in> :not(.logo) span {
+    display: none
+  }
+
+  body.menu-min .topo-in> :not(.logo) .mini {
+    padding: 5px 8px;
+    font-size: 12px
+  }
+}
+
+/* ---------- Celular e telas pequenas ---------- */
+@media (max-width:900px) {
+  .hero {
+    padding: 20px 18px
+  }
+
+  .hero h1 {
+    font-size: 24px
+  }
+
+  .at-item {
+    flex-wrap: wrap
+  }
+}
+
+@media (max-width:700px) {
+  .cal>* {
+    min-height: 52px;
+    padding: 4px
+  }
+
+  .chip {
+    height: 9px;
+    width: 9px;
+    padding: 0;
+    font-size: 0;
+    display: inline-block;
+    margin: 3px 3px 0 0;
+    border-radius: 50%
+  }
+
+  .conteudo,
+  .topo-in,
+  nav {
+    padding-left: 14px;
+    padding-right: 14px
+  }
+
+  #novo {
+    padding: 18px 16px
+  }
+
+  .logo img {
+    width: 44px;
+    height: 44px
+  }
+
+  .gr-lin {
+    grid-template-columns: 56px 1fr 96px;
+    gap: 8px
+  }
+
+  body.drawer-aberto #novo {
+    border-radius: 0
+  }
+
+  .dr-cab {
+    margin: 0 -16px 14px;
+    padding: 18px 16px 10px
+  }
+
+  .dr-rodape {
+    margin: 0 -16px;
+    padding: 12px 16px 16px
+  }
+
+  .hr-grade {
+    grid-template-columns: repeat(4, 1fr)
+  }
+}
+
+/* ---------- Fontes: letras em Inter, números em Bebas Neue ---------- */
+body,
+input,
+select,
+textarea,
+.btn,
+.mini,
+.link,
+nav button,
+.seg button,
+.sem-dia,
+.sem-ev,
+.sem-ev-s,
+.cli-item {
+  font-family: "NumBebas", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-synthesis: none;
+}
+
+h2,
+h3,
+.ev b,
+.saud h2,
+.hero h1,
+.cal-cab h3 {
+  font-family: "NumBebas", "Inter", system-ui, sans-serif;
+  font-synthesis: none;
+  letter-spacing: -.01em;
+}
+
+.logo {
+  font-family: Georgia, "Times New Roman", serif
+}
+
+.kpi b,
+.cal .d b,
+.val,
+td.r,
+.hr-b,
+.hr-res,
+.selo b,
+.sem-dia b {
+  font-family: "Bebas", "NumBebas", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: .03em;
+}
+
+.kpi b {
+  font-size: 26px
+}
+
+.hr-b {
+  font-size: 16px
+}
+
+.hr-res {
+  font-size: 17px;
+  color: var(--gold-d)
+}
+
+/* ---------- Impressão ---------- */
+#ficha {
+  display: none
+}
+
+@media print {
+  @page {
+    margin: 14mm
+  }
+
+  body,
+  body:has(> .topo) {
+    background: #fff;
+    display: block;
+    padding-left: 0 !important
+  }
+
+  .topo,
+  .rodape,
+  .conteudo,
+  .modal,
+  .menu-toggle,
+  #drawerFundo {
+    display: none !important
+  }
+
+  #ficha {
+    display: block;
+    color: #000
+  }
+
+  #ficha h1 {
+    font: 700 24px Georgia, serif;
+    border-bottom: 4px solid #000;
+    padding-bottom: 6px;
+    margin: 0 0 4px
+  }
+
+  #ficha .sub {
+    margin: 0 0 14px;
+    color: #444
+  }
+
+  #ficha h4 {
+    font: 700 14px Georgia, serif;
+    margin: 14px 0 4px;
+    text-transform: uppercase;
+    letter-spacing: .05em
+  }
+
+  #ficha table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px
+  }
+
+  #ficha th,
+  #ficha td {
+    border: 1px solid #000;
+    padding: 6px 8px;
+    background: #fff;
+    color: #000
+  }
+
+  #ficha th {
+    width: 34%;
+    text-align: left
+  }
+
+  #ficha table.rel th {
+    width: auto;
+    background: #000;
+    color: #fff
+  }
+
+  #ficha .assin {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px
+  }
+
+  #ficha .assin div {
+    flex: 1;
+    border-top: 1px solid #000;
+    padding-top: 4px;
+    text-align: center;
+    font-size: 12px
+  }
+
+  #ficha .rod {
+    margin-top: 24px;
+    font-size: 11px;
+    color: #444;
+    text-align: center
+  }
+}
+
+/* ---------- Menu preto ---------- */
+.topo {
+  background: #000;
+  color: #fff;
+}
+
+nav button {
+  color: #fff;
+}
+
+nav button:hover {
+  background: #222;
+}
+
+nav button[aria-selected=true] {
+  background: var(--gold);
+  color: #000;
+}
+
+.topo-in> :not(.logo) {
+  color: #fff;
+}
+
+@media (min-width: 901px) {
+  .topo-in> :not(.logo) {
+    border-top-color: #2a2a2a;
+  }
+}
+
+/* ---------- Setas do mês ---------- */
+.cab-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.cab-nav .cab-sub {
+  margin: 0;
+}
+
+.seta {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  color: #000;
+  font: 700 18px/1 system-ui, sans-serif;
+  cursor: pointer;
+  transition: .12s;
+}
+
+.seta:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ---------- Informação dentro do quadrado do dia (ao passar o mouse) ---------- */
+.cal .d .d-info {
+  display: none;
+}
+
+@media (hover: hover) and (min-width: 701px) {
+  .cal>* {
+    min-height: 120px;
+  }
+
+  .cal .d:hover .d-info {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 30px;
+    background: var(--soft);
+    padding: 2px 8px 6px;
+    overflow-y: auto;
+    z-index: 2;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+}
+
+.d-info .di-bloco {
+  display: block;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+}
+
+.d-info .di-bloco:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.di-ev,
+.di-meta,
+.di-val {
+  display: block;
+}
+
+.di-meta {
+  color: var(--mut);
+  margin-top: 1px;
+}
+
+.di-meta .dot {
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+}
+
+.di-val {
+  font-size: 14px;
+  margin-top: 1px;
+}
+
+/* ---------- Detalhes do dia: janela ao clicar ---------- */
+#det {
+  display: none;
+}
+
+#detFundo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  z-index: 65;
+}
+
+body.det-aberto {
+  overflow: hidden;
+}
+
+body.det-aberto #det {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 92vw);
+  max-height: 84vh;
+  overflow-y: auto;
+  z-index: 70;
+  margin: 0;
+  padding: 22px 24px;
+}
+
+#det .det-x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  line-height: 1;
+}
+
+@media print {
+  #detFundo {
+    display: none !important;
+  }
+}
+
+/* botão que recolhe o menu: branco, e creme quando o mouse passa por cima */
+.menu-toggle {
+  background: #fff;
+  color: #000;
+}
+
+.menu-toggle:hover {
+  background: var(--gold);
+}
+
+/* ---------- Calendário com lista ao lado ---------- */
+.cal-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 18px; align-items: start; }
+.cal-col { min-width: 0; }
+
+.lista-lado {
+  position: sticky; top: 16px;
+  background: #fff; border: 1.5px solid var(--ink); border-radius: var(--rad);
+  box-shadow: var(--sombra); padding: 14px 16px;
+  max-height: calc(100vh - 40px); overflow-y: auto;
+}
+.ls-cab { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.ls-cab h3 { margin: 0; padding: 0; border: 0; font-size: 17px; }
+.ls-mes {
+  margin: 16px 0 6px; font: 700 12px system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--mut);
+}
+
+.ls-item {
+  display: grid; grid-template-columns: 46px 1fr; gap: 12px; align-items: center;
+  width: 100%; text-align: left; margin-bottom: 8px; padding: 8px 10px;
+  background: #fff; color: inherit; cursor: pointer;
+  border: 1.5px solid var(--line); border-radius: 12px;
+  font: 14px "NumBebas", "Inter", system-ui, sans-serif; font-synthesis: none;
+}
+.ls-item:hover { border-color: var(--ink); background: var(--soft); }
+
+.ls-data {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--soft); border-radius: 10px; padding: 4px 0;
+}
+.ls-data b { font: 400 22px/1.1 "Bebas", "NumBebas", Georgia, serif; letter-spacing: .03em; }
+.ls-data small { font-size: 11px; color: var(--mut); }
+
+.ls-info { min-width: 0; }
+.ls-info small { display: block; margin-top: 2px; color: var(--mut); font-size: 12px; }
+.ls-info .dot { width: 8px; height: 8px; margin-right: 5px; }
+
+/* telas menores: a lista passa para baixo do calendário */
+@media (max-width: 1100px) {
+  .cal-layout { grid-template-columns: 1fr; }
+  .lista-lado { position: static; max-height: 440px; }
+}
